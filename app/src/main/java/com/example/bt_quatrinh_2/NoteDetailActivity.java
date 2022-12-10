@@ -77,12 +77,9 @@ public class NoteDetailActivity extends AppCompatActivity {
         String a = intent.getStringExtra("title_b");
         String b = intent.getStringExtra("content_b");
         String c = intent.getStringExtra("timer_b");
-        int d = getIntent().getExtras().getInt("gio");
-        int e = getIntent().getExtras().getInt("phut");
         titled.setText(a);
         contented.setText(b);
         timer.setText(c);
-        timer.setText((d +":"+ e));
         btn = findViewById(R.id.btn_a);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +96,10 @@ public class NoteDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(NoteDetailActivity.this,TimePickerActivity.class);
+                intent1.putExtra("title_b", titled.getText().toString());
+                intent1.putExtra("content_b", contented.getText().toString());
                 startActivity(intent1);
+                finish();
             }
         });
     }

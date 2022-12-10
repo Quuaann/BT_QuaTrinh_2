@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AlarmReceiver extends BroadcastReceiver {
     ArrayList<String> chuoi;
@@ -30,12 +31,16 @@ public class AlarmReceiver extends BroadcastReceiver {
         mContext = context;
         createNotificationChannels();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,AlarmReceiver.CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Hello")
-                .setContentText("Day la thong bao")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("THÔNG BÁO")
+                .setContentText("Bạn có một cuộc hẹn!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(getNotificationID(), builder.build());
+    }
+
+    private int getNotificationID() {
+        return (int) new Date().getTime();
     }
 
     private void createNotificationChannels()  {
